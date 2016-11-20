@@ -1,16 +1,18 @@
+
 <h1>Lemonaid_Stand_Offerings</h1>
 <h1>KSE's Lemonaid_Stand</h1>
-<h2>Sizes Regular 1.00 Large 2.00 Extra Large 3.00 </h2>
 <h2>________________________________________________</h2>
-
-<h1> Lemondaid</h1>
-
-<h1> Strawberry Lemonaid</h1>
-
-<h1> Blueberry Lemonaid</h1>
-
-<h1> Arnold Palmer</h1>
-
+<div class="row">
+<% @lemonaids.each do | lemonaid | %>
+  <div class="col-md-12">
+    <div class="well">
+      <p><%= lemonaid.name %></p>
+      <p><%= lemonaid.discription %></p>
+      <p><%= lemonaid.price %></p>
+    </div>
+  </div>
+<%end%>
+</div>
 
 <div class="container">
     <div class="row"></div>
