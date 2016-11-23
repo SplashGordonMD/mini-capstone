@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   get '/lemonaids/:id/edit' => 'lemonaids#edit'
   patch '/lemonaids/:id' => 'lemonaids#update'
   delete '/lemonaids/:id' => 'lemonaids#destroy'
+
+  get '/signup' => 'users#new'
+  post '/users' => 'users#create'
 end
 
   

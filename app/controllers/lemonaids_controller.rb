@@ -1,9 +1,22 @@
 class LemonaidsController < ApplicationController
-
   def index
-    sort_attribute = params[:sort]
-    sort_order = params[:sort_order]
-    sort_price = params[:sort_price]
+    if session[:count] == nil
+       sessions[:count] += 0
+    end  
+        session[:count] +=1
+        @visit_count = session[:count]
+
+    only_show_discount = params[:discount] == "true"
+    if only_show_discount
+      @lemonaids = Lemonaid.where("price < ?", 10)
+    else 
+      sort_attribute = params[:sort] || "name"
+      sort_order = params[:sort_order] || "asc"
+      @lemonaids = Lemonaid.order(sort_attribute => sort_order)
+    end
+    render 'index.html.erb'
+  end
+      sort_price = params[:sort_price]
     puts "attribute: #{sort_attribute}"
     puts "order: #{sort_order}"
         
@@ -29,7 +42,11 @@ class LemonaidsController < ApplicationController
   end
 
   def create
-    @lemonaid=Lemonaid.new(name: params[:name], discription: params[:discription], image: params[:image], price: params[:price])
+    @lemonaid=Lemonaid.new(
+      name: params[:name], 
+      discription: params[:discription], 
+      image: params[:image],
+      price: params[:price])
       if @lemonaid.save
         redirect_to "/lemonaids/#{@lemonaid.id}"
       else 
