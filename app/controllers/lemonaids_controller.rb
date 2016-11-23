@@ -49,14 +49,18 @@ class LemonaidsController < ApplicationController
   end
 
   def update  
-    recipe.save
-    render 'update.html.erb'
+    lemonaid = Lemonaid.find_by(id: params[:id])
+    lemonaid.name=params[:name]
+    lemonaid.discription=params[:discription]
+    lemonaid.price=params[:price]
+    lemonaid.save
+    redirect_to "/lemonaids/#{lemonaid.id}"
   end
 
   def destroy
     lemonaid_id = params[:id]
     lemonaid = Lemonaid.find_by(id: lemonaid_id)
     lemonaid.destroy
-    render 'destroy.html.erb'
+    redirect_to "/lemonaids"
   end
 end
