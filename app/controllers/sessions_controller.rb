@@ -1,6 +1,4 @@
 class SessionsController < ApplicationController
-# app/controllers/sessions_controller.rb
-class SessionsController < ApplicationController
   def new
     render 'new.html.erb'
   end
@@ -10,7 +8,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:success] = 'Successfully logged in!'
-      redirect_to '/'
+      redirect_to '/lemonaids'
     else
       flash[:warning] = 'Invalid email or password!'
       redirect_to '/login'
@@ -22,7 +20,5 @@ class SessionsController < ApplicationController
     flash[:success] = 'Successfully logged out!'
     redirect_to '/login'
   end
-end
-
 end
 
