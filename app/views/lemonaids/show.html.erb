@@ -1,6 +1,18 @@
 <h2>Lemonaid type: <%= @lemonaid.name %></h2>
 <h2>Lemonaid price: <%= @lemonaid.price %></h2>
 <h2>Lemonaid image: <%= @lemonaid.image %></h2>
-<h2>Lemonaid discription: <%= @lemonaid.discription %></h2>
+<h2>Lemonaid discription: <%= @lemonaid.discription %></h2>tag :
 
 <%= link_to "Destroy this lemonaid (this works!)", "/lemonaids/#{@lemonaid.id}", method: :delete %>
+
+<%= form_tag '/orders', method: :post do %>
+<p><%= label_tag :user_id, "User ID" %></p>
+<p> <%= text_field_tag :user_id, current_user.id, class: 'form-controll' %> </p>
+
+<p><%= label_tag :lemonaid_id, "Lemonaid ID" %></p>
+<p> <%= text_field_tag :lemonaid_id, @lemonaid.id, class: 'form-controll' %> </p>
+
+<p><%= label_tag :quantity %></p>
+<p> <%= text_field_tag :quantity, "", class: 'form-controll' %> </p>
+<%= submit_tag "Buy Now!" %>
+<% end %>
