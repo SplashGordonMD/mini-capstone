@@ -1,18 +1,51 @@
-<h2>Lemonaid type: <%= @lemonaid.name %></h2>
-<h2>Lemonaid price: <%= @lemonaid.price %></h2>
-<h2>Lemonaid image: <%= @lemonaid.image %></h2>
-<h2>Lemonaid discription: <%= @lemonaid.discription %></h2>tag :
+<section>
+  <div class="row">
+    <div class=class="col-sm-8 col-sm-offset-2">
+      <div class="product_single">
+        <h2>Lemonaid type: <%= @lemonaid.name %></h2>
+        <h2>Lemonaid price: <%= @lemonaid.price %></h2>
+        <h2>Lemonaid image: <%= @lemonaid.image %></h2>
+        <h2>Lemonaid discription: <%= @lemonaid.discription %></h2>tag :
+        <ul>
+          <% %product.categories.each.do |category| %>
+            <li><%= category.name %></li>
+          <% end %>
+        </ul>
+        <% if @lemonaid.dicsointed? %>
+          <p class="dicount">Price: <%= number_to_currency(product.price) %></p>
+          <p>Discount item!</p>
+        <% else %>
+          <p>Price: <%= number_to_currency(@product.price) %></p>
+          <p>Real Value!</p>
+        <% end %>
+        <p>Tax: <%= number_to_currency(product.tax) %></p>
+        <p>Total: <%= number_to_currency(@product_total) %></p>
+        <% @product.immages.each do |image|
+          <img src=http://www.landsharkspizza.com/wp-content/uploads/2016/03/Landsharks-Destin-FL-Pizza-and-Wings-Drink-of-the-Day-The-John-Daly.jpg>
+        <% end %>
 
-<%= link_to "Destroy this lemonaid (this works!)", "/lemonaids/#{@lemonaid.id}", method: :delete %>
-
-<%= form_tag '/cart', method: :post do %>
-<p><%= label_tag :user_id, "User ID" %></p>
-<p> <%= text_field_tag :user_id, current_user.id, class: 'form-controll' %> </p>
-
-<p><%= label_tag :lemonaid_id, "Lemonaid ID" %></p>
-<p> <%= text_field_tag :lemonaid_id, @lemonaid.id, class: 'form-controll' %> </p>
-
-<p><%= label_tag :quantity %></p>
-<p> <%= text_field_tag :quantity, "", class: 'form-controll' %> </p>
-<%= submit_tag "Add to Cart" %>
-<% end %>
+        <%= link_to "Destroy this lemonaid (this works!)", "/lemonaids/#{@lemonaid.id}", method: :delete %>
+        <%= form_tag '/cart', method: :post do %>
+          <div>
+            <p><%= label_tag :quantity %></p>
+            <p> <%= text_field_tag :quantity, "", class: 'form-controll' %> </p>
+          </div>
+          <div>
+            <%= hidden_field_tag : product_id, @product.id %>
+          </div>
+            <%= submit_tag "Add to Cart" %>
+          <div>
+            <p><%= label_tag :user_id, "User ID" %></p>
+            <p> <%= text_field_tag :user_id, current_user.id, class: 'form-controll' %> </p>
+          </div>
+          <%end%>
+          <div>
+            <p><%= label_tag :lemonaid_id, "Lemonaid ID" %></p>
+            <p> <%= text_field_tag :lemonaid_id, @lemonaid.id, class: 'form-controll' %> </p>
+          </div>
+           <%= if current user && current_user.admin %>
+          </end>
+        </div>
+      </div>
+    </section>
+  
