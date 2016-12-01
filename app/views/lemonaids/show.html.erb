@@ -34,6 +34,12 @@
             <%= hidden_field_tag : product_id, @product.id %>
           </div>
             <%= submit_tag "Add to Cart" %>
+          <% end %>
+          <% if current_user && current_user.admin %>
+              <%= link_to "New image", "/lemonaids/#{@lemonaid.id}/images/new", class:
+              <%= link_to "Edit", "/lemonaids/#{@lemonaid.id}/edit", class: "btn btn-suc" %>
+              <%= link_to "Delete", "products/#{@lemonaid.id}", {method: :delete, class} %>
+            <% end %>
           <div>
             <p><%= label_tag :user_id, "User ID" %></p>
             <p> <%= text_field_tag :user_id, current_user.id, class: 'form-controll' %> </p>
