@@ -16,7 +16,7 @@ class CartedProductsController < ApplicationController
       product_id: params[:product_id],   #belongs_to :order
       status: "carted"
       )
-    cart.save
+    
     flash[:sucess] = "Added to Cart"
     redirect_to '/lemonaids'
   end
