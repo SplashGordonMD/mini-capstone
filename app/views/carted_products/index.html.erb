@@ -1,9 +1,13 @@
-<h1>Choosen Items</h1>
+<h1>Check out Page</h1>
  <% @carted_products.each do |carted_product| %>
-  <h2><%=carted_product.quantity%></h2> 
-  <h2><%=carted_product.name%></h2>
-  <h2><%=carted_product.price%></h2>
+  <h2>Quantity: <%= carted_product.quantity %></h2> 
+  <h2><%= carted_product.lemonaid %></h2>
+  <h2><%= carted_product.price%></h2>
  <% end %>
+
+<%= form_tag "/orders", method: :post do %>
+  <%= submit_tag "Buy now!" %>
+<% end %>
 
 
   
