@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get '/logout' => 'sessions#destroy'
   post '/orders' => 'orders#create'
   get '/orders/:id' => 'orders#show'
-  post "/cart" => "cartedproducts#create"
+  post "/cart" => "carted_products#create"
   get '/cartedproducts' => 'carted_products#index'
 
 end
