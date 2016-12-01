@@ -9,7 +9,7 @@
 <% @lemonaids.each do | lemonaid | %>
   <div class="col-md-12">
     <div class="well">
-      <p><%= lemonaid.name %></p>
+      <p><a href="/lemonaids/<%= lemonaid.id %>"><%= lemonaid.name %></a></p>
       <p><%= lemonaid.discription %></p>
       <p><%= lemonaid.price %></p>
       <img src="<%= lemonaid.image %>" width="200px">
