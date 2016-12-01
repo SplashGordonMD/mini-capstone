@@ -1,1 +1,9 @@
-<h1>Hello</h1>
+<h1>Choosen Items</h1>
+ <% @carted_products.each do |carted_product| %>
+  <h2><%=carted_product.quantity%></h2> 
+  <h2><%=carted_product.name%></h2>
+  <h2><%=carted_product.price%></h2>
+ <% end %>
+
+
+  
