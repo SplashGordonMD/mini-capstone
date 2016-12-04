@@ -84,4 +84,3 @@ class LemonaidsController < ApplicationController
     lemonaid.destroy
     redirect_to "/lemonaids"
   end
-end

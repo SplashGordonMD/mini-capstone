@@ -38,7 +38,7 @@
           <% if current_user && current_user.admin %>
               <%= link_to "New image", "/lemonaids/#{@lemonaid.id}/images/new", class:
               <%= link_to "Edit", "/lemonaids/#{@lemonaid.id}/edit", class: "btn btn-suc" %>
-              <%= link_to "Delete", "products/#{@lemonaid.id}", {method: :delete, class} %>
+              <%= link_to "Delete", "lemonaidss/#{@lemonaid.id}", {method: :delete, class} %>
             <% end %>
           <div>
             <p><%= label_tag :user_id, "User ID" %></p>

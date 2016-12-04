@@ -1,3 +1,45 @@
+<section>
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+      <div class="lemonaid_single">
+        <h2><%= @lemonaid.name %></h2>
+        <% if lemonaid.discounted? %>
+          <p class="discount-item">Price: <%= number_to_currency(@product.price) %>
+          <p>Discount Item!</p>
+         <% end %>
+         <p>Tax: <%= number_to-currency(@lemondaid.tax) %></p>
+         <p>Total: <%= number_to_currency(@lemonaid.tax) %></p>
+         <p>Sold by <%= @lemonaid.supplier.name
+         <h3>
+          Categories:
+          <% @lemonaid.categories.each do |category|
+            <a href="/lemonaid?category_name=<%= category.name %>"> class="img-res"
+           <% end %>
+         </h3>  
+         <% @ product.images.each.do |image| %>
+            <img src="http://www.landsharkspizza.com/wp-content/uploads/2016/03/Landsharks-Destin-FL-Pizza-and-Wings-Drink-of-the-Day-The-John-Daly.jpg"
+         <% end %>
+         <p>Description: <%= @lemonaid.description %></p>
+         <%= form_tag "/carted_lemonaids", method: :post do %>
+            <div>
+              <%= label_tag :quantity %>
+              <%= text_field_tag :quantity %>
+            </div>
+            <div>
+              <%= hidden_field_tag :lemonaid_id, @lemonaid.id %>
+            </div>
+            <%=submit_tag "Add to cart!" %>
+          <% end %>
+          <% if current_user.admin == true %>
+            <%= link_to "Edit", "/lemonaids/#{@lemonaid.id}/edit", class: "btn btn-success" %>
+            <%= link_to "Delete", "/lemonaids/#{@lemonaids.id}", {method: :delete, class: "btn btn-danger" } %>
+          <% end %>
+        </div>
+       </div>
+      </div>
+    </section>             
+
+
 <h1>Your order information is</h1>
 <p>User: <%= @order.user.name %></p>
 <p>Lemonaid: <%= @order.lemonaid.name %></p>
