@@ -30,7 +30,7 @@
             </div>
             <%=submit_tag "Add to cart!" %>
           <% end %>
-          <% if current_user.admin == true %>
+          <% if current_user && current_user.admin %>
             <%= link_to "Edit", "/lemonaids/#{@lemonaid.id}/edit", class: "btn btn-success" %>
             <%= link_to "Delete", "/lemonaids/#{@lemonaids.id}", {method: :delete, class: "btn btn-danger" } %>
           <% end %>

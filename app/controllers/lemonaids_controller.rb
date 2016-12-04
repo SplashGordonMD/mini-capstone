@@ -38,10 +38,12 @@ class LemonaidsController < ApplicationController
   # end 
 
   def new
-    if current_user && current_user.admin
-      render 'new.html.erb'
-    else
+    unless current_user && current_user.admin
       redirect_to "/"
+      return
+  end
+
+  render 'new.html.erb'
   end
 
   def create
@@ -75,12 +77,28 @@ class LemonaidsController < ApplicationController
     lemonaid.discription=params[:discription]
     lemonaid.price=params[:price]
     lemonaid.save
+    flash[:success] = "Product Updated"
     redirect_to "/lemonaids/#{lemonaid.id}"
   end
 
   def destroy
     lemonaid_id = params[:id]
-    lemonaid = Lemonaid.find_by(id: lemonaid_id)
-    lemonaid.destroy
+    unless current_user && current_user.admin
+    redirect_to "/lemonaids"
+    return
+  end
+
+    @lemonaid = Lemonaid.find_by(id: lemonaid_id)
+    @lemonaid.destroy
+    flash[:warning] = "Product Destroyed"
     redirect_to "/lemonaids"
   end
+
+  def search
+    search_term = params[:search]
+    @lemonaids = Lemonaid.where("name LIKE ?", '%' + search_term + '%')
+    render 'index.html.erb'
+  end
+
+end
+
