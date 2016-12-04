@@ -50,8 +50,8 @@ class LemonaidsController < ApplicationController
     @lemonaid=Lemonaid.new(
       name: params[:name], 
       discription: params[:discription], 
-      image: params[:image],
       price: params[:price]
+      supplier_id: 1
     )
     if @lemonaid.save
       redirect_to "/lemonaids/#{@lemonaid.id}"
@@ -84,9 +84,9 @@ class LemonaidsController < ApplicationController
   def destroy
     lemonaid_id = params[:id]
     unless current_user && current_user.admin
-    redirect_to "/lemonaids"
-    return
-  end
+      redirect_to "/lemonaids"
+      return
+    end
 
     @lemonaid = Lemonaid.find_by(id: lemonaid_id)
     @lemonaid.destroy
