@@ -6,7 +6,7 @@ class Lemonaid < ApplicationRecord
   has_many :carted_products
   has_many :orders, through: :carted_products
 
-  validates :name, price: true
+  validates :name, :price, presence: true
 
   def tax
     price.to_f * 0.09    

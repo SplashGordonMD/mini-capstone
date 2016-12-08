@@ -1,28 +1,26 @@
 <section>
   <div class="row">
     <div class=class="col-sm-8 col-sm-offset-2">
-      <div class="product_single">
+      <div class="lemonaid_single">
         <h2>Lemonaid type: <%= @lemonaid.name %></h2>
         <h2>Lemonaid price: <%= @lemonaid.price %></h2>
         <h2>Lemonaid image: <%= @lemonaid.image %></h2>
         <h2>Lemonaid discription: <%= @lemonaid.discription %></h2>tag :
         <ul>
-          <% %product.categories.each.do |category| %>
+          <% @lemonaid.catigories.each do |category| %>
             <li><%= category.name %></li>
           <% end %>
         </ul>
-        <% if @lemonaid.dicsointed? %>
-          <p class="dicount">Price: <%= number_to_currency(product.price) %></p>
+        <% if @lemonaid.discounted? %>
+          <p class="dicount">Price: <%= number_to_currency(@lemonaid.price) %></p>
           <p>Discount item!</p>
         <% else %>
-          <p>Price: <%= number_to_currency(@product.price) %></p>
+          <p>Price: <%= number_to_currency(@lemonaid.price) %></p>
           <p>Real Value!</p>
         <% end %>
-        <p>Tax: <%= number_to_currency(product.tax) %></p>
-        <p>Total: <%= number_to_currency(@product_total) %></p>
-        <% @product.immages.each do |image|
-          <img src=http://www.landsharkspizza.com/wp-content/uploads/2016/03/Landsharks-Destin-FL-Pizza-and-Wings-Drink-of-the-Day-The-John-Daly.jpg>
-        <% end %>
+        <p>Tax: <%= number_to_currency(@lemonaid.tax) %></p>
+        <p>Total: <%= number_to_currency(@lemonaid_total) %></p>
+        
 
         <%= link_to "Destroy this lemonaid (this works!)", "/lemonaids/#{@lemonaid.id}", method: :delete %>
         <%= form_tag '/cart', method: :post do %>
@@ -31,26 +29,25 @@
             <p> <%= text_field_tag :quantity, "", class: 'form-controll' %> </p>
           </div>
           <div>
-            <%= hidden_field_tag : product_id, @product.id %>
+            <%= hidden_field_tag :lemonaid_id, @lemonaid.id %>
           </div>
             <%= submit_tag "Add to Cart" %>
-          <% end %>
+        <% end %>
           <% if current_user && current_user.admin %>
-              <%= link_to "New image", "/lemonaids/#{@lemonaid.id}/images/new", class:
+              <%= link_to "New image", "/lemonaids/#{@lemonaid.id}/images/new" %>
               <%= link_to "Edit", "/lemonaids/#{@lemonaid.id}/edit", class: "btn btn-suc" %>
-              <%= link_to "Delete", "lemonaidss/#{@lemonaid.id}", {method: :delete, class} %>
-            <% end %>
+              <%= link_to "Delete", "lemonaidss/#{@lemonaid.id}", {method: :delete} %>
+          <% end %>
           <div>
             <p><%= label_tag :user_id, "User ID" %></p>
             <p> <%= text_field_tag :user_id, current_user.id, class: 'form-controll' %> </p>
           </div>
-          <%end%>
+        
           <div>
             <p><%= label_tag :lemonaid_id, "Lemonaid ID" %></p>
             <p> <%= text_field_tag :lemonaid_id, @lemonaid.id, class: 'form-controll' %> </p>
           </div>
-           <%= if current user && current_user.admin %>
-          </end>
+        
         </div>
       </div>
     </section>

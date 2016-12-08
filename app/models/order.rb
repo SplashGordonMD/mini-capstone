@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  belongs_to :user
+  belongs_to :user # Each order belongs to ONE USER. A user can have many orers.
   belongs_to :lemonaid
   has_many :orders
   has_many :carted_products

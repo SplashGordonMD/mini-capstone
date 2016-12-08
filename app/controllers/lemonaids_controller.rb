@@ -15,43 +15,23 @@ class LemonaidsController < ApplicationController
       @lemonaids = Lemonaid.order(sort_attribute => sort_order)
     end
     render 'index.html.erb'
-  end
-  #   sort_price = params[:sort_price]
-  #   puts "attribute: #{sort_attribute}"
-  #   puts "order: #{sort_order}"
-        
-  #   if sort_attribute && sort_order
-  #     @lemonaids = Lemonaid.order("#{sort_attribute} #{sort_order}")
-  #   elsif sort_attribute
-  #     if sort_price 
-  #       # "price = ?", "1.00"
-  #       # @lemonaids=Lemonaid.where(sort_attribute <= sort_price)
-  #       @lemonaids=Lemonaid.where("#{sort_attribute} <= ?", "#{sort_price}")
-  #     else
-  #       @lemonaids = Lemonaid.order("#{sort_attribute}")
-  #     end
-  #   else 
-  #     @lemonaids = Lemonaid.all
-  #   end
-
-  #   render "index.html.erb"
-  # end 
+  end 
 
   def new
     unless current_user && current_user.admin
       redirect_to "/"
       return
-  end
-
-  render 'new.html.erb'
+    end
+    @lemonaid = Lemonaid.new
+    render 'new.html.erb'
   end
 
   def create
-    @lemonaid=Lemonaid.new(
+    @lemonaid = Lemonaid.new(
       name: params[:name], 
       discription: params[:discription], 
+      image: params[:image],
       price: params[:price]
-      supplier_id: 1
     )
     if @lemonaid.save
       redirect_to "/lemonaids/#{@lemonaid.id}"
@@ -72,15 +52,20 @@ class LemonaidsController < ApplicationController
   end
 
   def update  
-    lemonaid = Lemonaid.find_by(id: params[:id])
-    lemonaid.name=params[:name]
-    lemonaid.discription=params[:discription]
-    lemonaid.price=params[:price]
-    lemonaid.save
-    flash[:success] = "Product Updated"
-    redirect_to "/lemonaids/#{lemonaid.id}"
+    @lemonaid = Lemonaid.find_by(id: params[:id])
+    @lemonaid.name=params[:name]
+    @lemonaid.discription=params[:discription]
+    @lemonaid.image=params[:image]
+    @lemonaid.price=params[:price]
+    if @lemonaid.save
+      flash[:success] = "Product Updated"
+      redirect_to "/lemonaids/#{@lemonaid.id}"
+    else 
+      flash[:warning] = "Product did not update" 
+      render "edit.html.erb"
+    end
   end
-
+  
   def destroy
     lemonaid_id = params[:id]
     unless current_user && current_user.admin
