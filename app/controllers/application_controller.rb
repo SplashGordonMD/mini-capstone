@@ -1,9 +1,9 @@
 class ApplicationController < ActionController::Base
 # Prevent CSRF attacks by raising an exception.
 # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :null_session
+  # protect_from_forgery with: :null_session
 
-  before_action :restrict_access
+  # before_action :restrict_access
  
    def restrict_access
      authenticate_or_request_with_http_token do |api_key, options|
@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
    end
   end
 
-  before_action :calculate_cart_count
+  # before_action :calculate_cart_count
 
   def current_user
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
@@ -30,4 +30,3 @@ class ApplicationController < ActionController::Base
       @cart_count = 0
     end
   end
-end
